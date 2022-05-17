@@ -1,12 +1,18 @@
-import Chart from "./components/Chart";
+import Chart from "./components/Chart/Chart";
+import TradeForm from "./components/TradeForm/TradeForm";
 
 
 function App() {
 
   return (
-    <main>
+    <main className="w-full bg-[#131722] min-h-[100vh]">
 
-      <Chart />
+      <section className="w-full flex">
+
+        <Chart />
+        <TradeForm />
+
+      </section>
 
 
     </main>
