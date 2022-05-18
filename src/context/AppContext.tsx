@@ -1,10 +1,16 @@
 import { AxiosResponse } from "axios";
 import { createContext, FC, ReactElement, useEffect, useState } from "react";
+
 import { getPrice } from "../api";
+import { AppContextInterface } from "../interfaces/AppContextInterface";
 import { NBPResponseInterface } from "../interfaces/NBPResponseInterface";
 
 
-export const AppContext = createContext({});
+export const AppContext = createContext<AppContextInterface>({
+  euroNBPPrice: 0,
+  euroPrice: 0,
+  setEuroPrice: () => {},
+});
 
 
 interface Props {
@@ -13,14 +19,16 @@ interface Props {
 
 const AppProvider: FC<Props> = ({ children }) => {
 
-  const [eurPlnPrice, setEurPlnPrice] = useState<number>();
+  const [euroNBPPrice, setEuroNBPPrice] = useState<number | null>(null);
+  const [euroPrice, setEuroPrice] = useState<number | null>(null);
   
   useEffect(() => {
 
     const fetchEurPrice = async (): Promise<void> => {
 
       const { data }: AxiosResponse<NBPResponseInterface> = await getPrice('EUR');
-      setEurPlnPrice(data.rates[0].mid);
+      setEuroNBPPrice(data.rates[0].mid);
+      setEuroPrice(data.rates[0].mid);
     }
 
     fetchEurPrice();
@@ -30,7 +38,9 @@ const AppProvider: FC<Props> = ({ children }) => {
   return (
     <>
       <AppContext.Provider value={{
-        eurPlnPrice
+        euroNBPPrice,
+        euroPrice,
+        setEuroPrice,
       }}>
         {children}
       </AppContext.Provider>
