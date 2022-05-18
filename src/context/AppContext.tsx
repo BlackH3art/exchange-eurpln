@@ -19,8 +19,8 @@ interface Props {
 
 const AppProvider: FC<Props> = ({ children }) => {
 
-  const [euroNBPPrice, setEuroNBPPrice] = useState<number | null>(null);
-  const [euroPrice, setEuroPrice] = useState<number | null>(null);
+  const [euroNBPPrice, setEuroNBPPrice] = useState<number>(0);
+  const [euroPrice, setEuroPrice] = useState<number>(0);
   
   useEffect(() => {
 

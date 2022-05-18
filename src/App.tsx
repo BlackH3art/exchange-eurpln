@@ -1,6 +1,7 @@
 import Chart from "./components/Chart/Chart";
 import EuroPriceBox from "./components/EuroPriceBox/EuroPriceBox";
 import TradeForm from "./components/TradeForm/TradeForm";
+import TransactionList from "./components/TransactionList/TransactionList";
 
 
 function App() {
@@ -15,6 +16,10 @@ function App() {
 
       </section>
 
+
+      <section className="w-full flex">
+        <TransactionList />
+      </section>
 
     </main>
   )
