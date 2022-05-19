@@ -104,7 +104,7 @@ const TradeForm: FC = () => {
 
           <label className={`${error.amount ? 'error-input' : ''} trade-label flex items-center px-5 py-4 mt-4`}>
             <p className="text-gray-400">Amount</p>
-            <input name="amount" min="0" step="0.01" type="number" className="trade-input text-right pr-4 w-full" onChange={handleChange} value={formData.amount} />
+            <input name="amount" min="0" step="0.01" type="number" className="trade-input text-right pr-4 w-full" onChange={handleChange} value={Number(formData.amount).toFixed(2)} />
             <p>EUR</p>
           </label>
           <p className="text-red-500 font-regular text-sm text-center">
