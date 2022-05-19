@@ -21,10 +21,10 @@ const TransactionRow: FC<Props> = ({ index, name, type, amount }) => {
         <BodyCell><p>{index}</p></BodyCell>
         <BodyCell><p>{name}</p></BodyCell>
         <BodyCell><p className={`${type === "buy" ? "bg-green-500" : "bg-red-400"} text-gray-200 rounded-full px-4 py-1`}>{type}</p></BodyCell>
-        <BodyCell><p className="text-right">{amount.toFixed(2)} EUR</p></BodyCell>
+        <BodyCell><p className="text-right">{Number(amount).toFixed(2)} EUR</p></BodyCell>
         <BodyCell>
           <p className={`${type === "buy" ? "text-green-500" : "text-red-400"} text-right`}>
-            {type === "buy" ? "+" : "-"} {(amount * euroPrice).toFixed(2)} PLN
+            {type === "buy" ? "+" : "-"} {(Number(amount) * euroPrice).toFixed(2)} PLN
           </p>
         </BodyCell>
       </tr>

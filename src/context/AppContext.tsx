@@ -10,6 +10,8 @@ export const AppContext = createContext<AppContextInterface>({
   euroNBPPrice: 0,
   euroPrice: 0,
   setEuroPrice: () => {},
+  type: "buy",
+  setType: () => {},
 });
 
 
@@ -21,6 +23,7 @@ const AppProvider: FC<Props> = ({ children }) => {
 
   const [euroNBPPrice, setEuroNBPPrice] = useState<number>(0);
   const [euroPrice, setEuroPrice] = useState<number>(0);
+  const [type, setType] = useState<string>("buy");
   
   useEffect(() => {
 
@@ -41,6 +44,8 @@ const AppProvider: FC<Props> = ({ children }) => {
         euroNBPPrice,
         euroPrice,
         setEuroPrice,
+        type, 
+        setType,
       }}>
         {children}
       </AppContext.Provider>

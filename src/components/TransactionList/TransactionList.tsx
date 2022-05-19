@@ -1,4 +1,8 @@
 import { FC, ReactElement } from "react";
+import { useSelector } from "react-redux";
+import { TransactionInterface } from "../../interfaces/TransactionInterface";
+import { RootState } from "../../redux/store";
+
 import TransactionRow from "./TransactionRow";
 
 const HeaderCell = ({ children }: { children: ReactElement}) => <th className="px-5 py-2 pr-10"> {children} </th>
@@ -6,16 +10,8 @@ const HeaderCell = ({ children }: { children: ReactElement}) => <th className="p
 
 const TransactionList: FC = () => {
 
-
-  const mockData = [
-    { id: "1", name: "Buy the euro dip", type: "buy", amount: 100 },
-    { id: "2", name: "Sell i need to pay rent", type: "sell", amount: 564.32 },
-    { id: "3", name: "Buy again, rent can wait", type: "buy", amount: 432.2352 },
-    { id: "4", name: "Sell I need to buy bread", type: "sell", amount: 1285.213 },
-    { id: "4", name: "Sell I needafjasklfsaflkasfkak to buy bread", type: "sell", amount: 1285.213 },
-  ]
-
-
+  const transactions: TransactionInterface[] = useSelector<RootState, TransactionInterface[]>((state) => state.transactions.transactions);
+  
   return (
     <>
       <div className="w-full p-5 ">
@@ -45,7 +41,7 @@ const TransactionList: FC = () => {
 
 
           <tbody>
-            {mockData.map((item, index) => (
+            {transactions.map((item, index) => (
               <TransactionRow 
                 key={index}
                 index={index + 1}
