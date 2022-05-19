@@ -27,6 +27,12 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+.table-wrapper {
+  overflow-x: auto;
+}
+.table-wrapper::-webkit-scrollbar {
+  width: 0;
+}
 .trade-label {
   width: 90%;
   background: rgba(255, 255, 255, 0.05);
