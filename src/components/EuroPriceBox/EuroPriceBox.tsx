@@ -1,13 +1,22 @@
-import { ChangeEvent, FC, useContext } from "react";
+import { ChangeEvent, FC, useContext, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 
 
 const EuroPriceBox: FC = () => {
 
   const { euroNBPPrice, euroPrice, setEuroPrice } = useContext(AppContext);
+  const [error, setError] = useState<string>("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setEuroPrice(Number(e.target.value));
+
+    if(Number(e.target.value) > 100) {
+      setError("Is hyperinflation already in?");
+    } else if(Number(e.target.value) <= 0) {
+      setError("Rate cannot be negative or zero");
+    } else {
+      setError("");
+      setEuroPrice(Number(e.target.value));
+    }
   }
 
   return (
@@ -24,11 +33,14 @@ const EuroPriceBox: FC = () => {
           {euroPrice === 0 ? euroNBPPrice : euroPrice}
         </h2>
 
-        <label className="trade-label flex items-center px-5 py-4 mt-4">
+        <label className={`${error ? "error-input" : ""} trade-label flex items-center px-5 py-4 mt-4`}>
           <p className="text-gray-400">Rate</p>
-          <input type="number" className="trade-input text-right pr-4 w-3/4" onChange={handleChange} />
+          <input type="number" min="0" max="100" step="0.01" className="trade-input text-right pr-4 w-3/4" onChange={handleChange} />
           <p>PLN</p>
         </label>
+        <p className="text-red-500 font-regular text-sm text-center">
+          {error}
+        </p>
 
       </div>
     </>

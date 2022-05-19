@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppContext } from "../../context/AppContext";
 import { deleteTransaction } from "../../redux/features/transactions-slice";
 
-const BodyCell = ({ children }: { children: ReactElement }) => <td className="px-5 py-2 pr-10"> {children} </td>
+export const BodyCell = ({ children }: { children: ReactElement | null }) => <td className="px-5 py-2 pr-10"> {children} </td>
 
 interface Props {
   id: string;
@@ -33,8 +33,8 @@ const TransactionRow: FC<Props> = ({ index, id, name, type, amount }) => {
         <BodyCell><p className={`${type === "buy" ? "bg-green-500" : "bg-red-400"} text-gray-200 rounded-full px-4 py-1`}>{type}</p></BodyCell>
         <BodyCell><p className="text-right">{Number(amount).toFixed(2)} EUR</p></BodyCell>
         <BodyCell>
-          <p className={`${type === "buy" ? "text-green-500" : "text-red-400"} text-right`}>
-            {type === "buy" ? "+" : "-"} {(Number(amount) * euroPrice).toFixed(2)} PLN
+          <p className={`${type !== "buy" ? "text-green-500" : "text-red-400"} text-right`}>
+            {type !== "buy" ? "+" : "-"}{(Number(amount) * euroPrice).toFixed(2)} PLN
           </p>
         </BodyCell>
         <BodyCell>

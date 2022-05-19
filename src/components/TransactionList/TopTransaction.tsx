@@ -10,7 +10,7 @@ const TopTransaction: FC<Props> = ({ transactions }) => {
 
   const { euroPrice } = useContext(AppContext);
 
-  const highestTransaction: TransactionInterface = transactions.sort((a, b) => b.amount - a.amount)[0];
+  const highestTransaction: TransactionInterface = transactions.slice().sort((a, b) => b.amount - a.amount)[0];
 
   return (
     <>
