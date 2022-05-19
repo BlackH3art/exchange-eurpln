@@ -2,6 +2,8 @@ import { FC, useState, FormEvent, FormEventHandler, ChangeEvent, ChangeEventHand
 import { useDispatch } from "react-redux";
 import { AppContext } from "../../context/AppContext";
 import { addTransaction } from "../../redux/features/transactions-slice";
+import { v4 as uuid } from 'uuid';
+
 import EuroPriceBox from "../EuroPriceBox/EuroPriceBox";
 
 
@@ -26,7 +28,7 @@ const TradeForm: FC = () => {
     e.preventDefault(); 
 
     dispatch(addTransaction({
-      id: "123",
+      id: uuid(),
       ...formData,
       type,
     }));

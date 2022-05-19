@@ -1,19 +1,29 @@
 import { FC, ReactElement, useContext } from "react";
+import { BsTrash } from 'react-icons/bs';
+import { useDispatch } from "react-redux";
 import { AppContext } from "../../context/AppContext";
+import { deleteTransaction } from "../../redux/features/transactions-slice";
 
 const BodyCell = ({ children }: { children: ReactElement }) => <td className="px-5 py-2 pr-10"> {children} </td>
 
 interface Props {
+  id: string;
   index: number;
   name: string;
   type: string;
   amount: number;
 }
 
-const TransactionRow: FC<Props> = ({ index, name, type, amount }) => {
+const TransactionRow: FC<Props> = ({ index, id, name, type, amount }) => {
+
+  const dispatch = useDispatch();
 
   const { euroPrice } = useContext(AppContext);
 
+
+  const handleDelete = (id: string) => {
+    dispatch(deleteTransaction(id));
+  }
 
   return (
     <>
@@ -26,6 +36,11 @@ const TransactionRow: FC<Props> = ({ index, name, type, amount }) => {
           <p className={`${type === "buy" ? "text-green-500" : "text-red-400"} text-right`}>
             {type === "buy" ? "+" : "-"} {(Number(amount) * euroPrice).toFixed(2)} PLN
           </p>
+        </BodyCell>
+        <BodyCell>
+          <button className="w-[20px] flex justify-center" onClick={() => handleDelete(id)}>
+            <BsTrash color="gray"/>
+          </button>
         </BodyCell>
       </tr>
     </>

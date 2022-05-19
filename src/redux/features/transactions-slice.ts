@@ -8,6 +8,9 @@ interface TransactionState {
 interface AddTransaction {
   payload: TransactionInterface;
 }
+interface DeleteTransaction {
+  payload: string;
+}
 
 const initialState: TransactionState = {
   transactions: []
@@ -20,8 +23,11 @@ export const transactionsSlice = createSlice({
     addTransaction: (state, action: AddTransaction) => {
       state.transactions.push(action.payload)
     }, 
+    deleteTransaction: (state, action: DeleteTransaction) => {
+      state.transactions =  state.transactions.filter(item => item.id !== action.payload);
+    }
   }
 });
 
 
-export const { addTransaction } = transactionsSlice.actions;
+export const { addTransaction, deleteTransaction } = transactionsSlice.actions;

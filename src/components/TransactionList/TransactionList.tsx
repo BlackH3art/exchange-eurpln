@@ -2,6 +2,7 @@ import { FC, ReactElement } from "react";
 import { useSelector } from "react-redux";
 import { TransactionInterface } from "../../interfaces/TransactionInterface";
 import { RootState } from "../../redux/store";
+import NoTransactionsYet from "./NoTransactionsYet";
 
 import TransactionRow from "./TransactionRow";
 
@@ -18,6 +19,7 @@ const TransactionList: FC = () => {
 
         <p className="text-gray-400">Transaction list</p>
 
+        {transactions.length ? (
         <table>
           <thead>
             <tr className="text-gray-300">
@@ -44,6 +46,7 @@ const TransactionList: FC = () => {
             {transactions.map((item, index) => (
               <TransactionRow 
                 key={index}
+                id={item.id}
                 index={index + 1}
                 name={item.name}
                 type={item.type}
@@ -51,8 +54,12 @@ const TransactionList: FC = () => {
               />
             ))}
           </tbody>
+        </table>) : (
 
-        </table>
+          <NoTransactionsYet />
+
+        )}
+
       </div>
     </>
   )
