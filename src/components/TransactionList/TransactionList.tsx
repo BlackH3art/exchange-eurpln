@@ -100,7 +100,7 @@ const TransactionList: FC = () => {
           
         </div>
         
-        <div className="flex w-1/2 min-h-[200px] flex-col p-5">
+        <div className="flex w-full lg:w-1/2 min-h-[200px] flex-col p-5">
           <p className="text-gray-400">
             Highest transaction:
           </p>
